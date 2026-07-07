@@ -327,9 +327,12 @@ def main():
                 force=force,
             )
 
-    print(
-        f"\n✓ Downloaded {len(soil_data)} soil records for {soil_data['field_id'].nunique()} fields"
-    )
+    if not soil_data.empty:
+        print(
+            f"\n✓ Downloaded {len(soil_data)} soil records for {soil_data['field_id'].nunique()} fields"
+        )
+    else:
+        print("\n⚠ No SSURGO soil data returned from primary or fallback sources")
     print(f"  Output: {farm_sample_output}")
 
     return soil_data

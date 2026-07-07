@@ -194,7 +194,8 @@ def main() -> None:
         return
 
     fields = gpd.read_file(_REPO / config.field_boundary_path)
-    soil_summary = pd.read_csv(farm_ssurgo_summary_path(_DEFAULT_GROWER, _DEFAULT_FARM))
+    ssurgo_summary_path = farm_ssurgo_summary_path(_DEFAULT_GROWER, _DEFAULT_FARM)
+    soil_summary = pd.read_csv(ssurgo_summary_path) if ssurgo_summary_path.exists() else pd.DataFrame()
     weather = pd.read_csv(
         farm_weather_path(_DEFAULT_GROWER, _DEFAULT_FARM),
         parse_dates=["date"],
